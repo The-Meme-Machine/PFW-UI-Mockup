@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+WRD-Montage.mp4
+WRD-Montage-Mute.mp4
 
 
 # local env files
