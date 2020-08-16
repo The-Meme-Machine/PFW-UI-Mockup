@@ -1,22 +1,26 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>-->
     <router-view />
   </div>
 </template>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Iceland&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Iceland&display=swap"); */
+@font-face {
+  font-family: "Bombardier";
+  src: url("./assets/BOMBARD_.ttf");
+}
 
 :root {
   font-size: 20px;
+  --main-color: aquamarine;
+  --secondary-color: cyan;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 #app {
-  font-family: "Iceland", Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Bombardier", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -31,7 +35,11 @@ a {
   color: aquamarine;
 }
 
-/* #nav a.router-link-exact-active {
-  color: #42b983;
-} */
+button {
+  background: none;
+  border: 2px solid var(--main-color);
+  font: inherit;
+  cursor: pointer;
+  transition: 0.25s all;
+}
 </style>

@@ -10,16 +10,16 @@
         <h2>Open-source RTT</h2>
         <ul>
           <li>
-            <router-link to="/game">Enter Game</router-link>
+            <button @click="games">Enter Game</button>
           </li>
           <li>
-            <a href="#">Profile</a>
+            <button>Profile</button>
           </li>
           <li>
-            <a href="#">Armory</a>
+            <button>Armory</button>
           </li>
           <li>
-            <a href="#">Settings</a>
+            <button>Settings</button>
           </li>
         </ul>
       </div>
@@ -33,10 +33,37 @@
 export default {
   name: "Home",
   components: {},
+  methods: {
+    games() {
+      this.$router.push({
+        path: "/game",
+      });
+    },
+  },
+  mounted() {
+    window.removeEventListener("keydown");
+  },
 };
 </script>
 
 <style scoped>
+button {
+  width: 200px;
+  height: 80px;
+  margin: 0.5em;
+  /* padding: 1em 2em; */
+  color: white;
+  box-shadow: 5px 5px 0 0 var(--main-color), inset 5px 5px 0 0 var(--main-color);
+}
+
+button:hover,
+button:focus {
+  box-shadow: 0 0 0 0 var(--secondary-color),
+    inset 200px 80px 0 0 var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: black;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -44,7 +71,6 @@ ul {
 
 ul > li {
   list-style-type: none;
-  cursor: pointer;
 }
 
 video {
@@ -54,6 +80,8 @@ video {
   min-width: 100vw;
   min-height: 100vh;
   z-index: -1;
+  /* Too performance hungry */
+  /* filter: hue-rotate(30deg); */
 }
 
 div.background {
@@ -62,7 +90,7 @@ div.background {
 }
 
 div.grad {
-  height: 100vh;
+  height: 200vh;
   color: white;
   background: linear-gradient(
     90deg,
