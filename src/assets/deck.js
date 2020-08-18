@@ -1,84 +1,93 @@
 export default {
   "log": [],
   "inf": [{
-    "name": "FSK '90",
-    "country": "norway",
-    "card": "FSK",
+    "name": "SAS",
+    "country": "uk",
+    "card": "SAS",
+    "cost": 35,
     "veterancy": [{
         "rank": "Elite",
-        "num": 7
-      },
-      {
+        "num": 4
+      }, {
         "rank": "Veteran",
-        "num": 9
-      }
-    ],
-    "stats": {
-      "weapons": [{
-          "name": "C7",
-          "caliber": "5.56mm",
-          "ammo": 1600,
-          "range": {
-            "ground": 525,
-            "heli": 525,
-            "air": 0
-          },
-          "accuracy": 60,
-          "stab": 30,
-          "ap": 0,
-          "he": 1,
-          "suppression": 40,
-          "rof": 355
-        },
-        {
-          "name": "Eryx"
-        },
-        {
-          "name": "I.MG3"
-        }
-      ],
-      "training": "Elite",
-      "speed": 35
-    }
-  }, {
-    "name": "RGSN '90",
-    "country": "norway",
-    "card": "FSK",
-    "veterancy": [{
+        "num": 6
+      }, {
+        "rank": "Hardened",
+        "num": 8
+      }, {
         "rank": "Trained",
-        "num": 7
+        "num": 11
       },
       {
         "rank": "Rookie",
-        "num": 9
+        "num": 18
       }
     ],
     "stats": {
       "weapons": [{
-          "name": "C7",
-          "caliber": "5.56mm",
+          "name": "M16",
+          "caliber": "5.56mm AR",
           "ammo": 1600,
+          "tags": [],
           "range": {
-            "ground": 525,
+            "grnd": 525,
             "heli": 525,
-            "air": 0
+            "air": null
           },
           "accuracy": 60,
           "stab": 30,
-          "ap": 0,
+          "ap": null,
           "he": 1,
           "suppression": 40,
           "rof": 355
         },
         {
-          "name": "Eryx"
+          "name": "AT4",
+          "caliber": "83mm LAW",
+          "ammo": 6,
+          "tags": ["HEAT", "STAT"],
+          "range": {
+            "grnd": 700,
+            "heli": null,
+            "air": null
+          },
+          "accuracy": 50,
+          "stab": null,
+          "ap": 19,
+          "he": null,
+          "suppression": 332,
+          "rof": 20
         },
         {
-          "name": "I.MG3"
+          "name": "FIM-92A Stinger",
+          "caliber": "IR MANPADS",
+          "ammo": 4,
+          "tags": ["AoE", "F&F", "STAT"],
+          "range": {
+            "grnd": null,
+            "heli": 2275,
+            "air": 1820
+          },
+          "accuracy": 50,
+          "stab": null,
+          "ap": null,
+          "he": 5,
+          "suppression": 200,
+          "rof": 6
         }
       ],
       "training": "Elite",
-      "speed": 35
+      "speed": 30,
+      "armor": {
+        "top": 0,
+        "front": 0,
+        "side": 0,
+        "back": 0
+      },
+      "optics": "Medium",
+      "size": "Very Small",
+      "stealth": 17,
+      "amphib": 0
     }
   }, ],
   "sup": [],

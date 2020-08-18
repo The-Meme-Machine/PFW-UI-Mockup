@@ -42,4 +42,20 @@ button {
   cursor: pointer;
   transition: 0.25s all;
 }
+
+/* Animations */
+/* slide */
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.25s ease-in-out;
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: translate(-50px);
+}
+.slide-leave-to {
+  opacity: 0;
+  transform: translate(50px);
+}
 </style>

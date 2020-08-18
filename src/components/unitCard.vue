@@ -54,6 +54,7 @@ export default {
 
 .card:hover {
   border-color: var(--secondary-color);
+  /* border-top-right-radius: 15px; */
 }
 
 #icon {
