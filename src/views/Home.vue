@@ -41,7 +41,7 @@ export default {
     },
   },
   mounted() {
-    window.removeEventListener("keydown");
+    // window.removeEventListener("keydown");
   },
 };
 </script>

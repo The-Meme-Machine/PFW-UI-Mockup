@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @mouseenter="hoverOn" @mouseleave="hoverOff">
     <img :src="flagUrl" alt="flag" id="flag" />
     <img :src="cardUrl" alt="card" id="icon" />
     <div id="name">{{name}}</div>
@@ -13,6 +13,7 @@ export default {
     unit: String,
     country: String,
     name: String,
+    data: Object,
   },
   computed: {
     flagUrl() {
@@ -20,6 +21,15 @@ export default {
     },
     cardUrl() {
       return require(`@/assets/cards/${this.unit}.png`);
+    },
+  },
+  methods: {
+    hoverOn() {
+      // console.log(this.data);
+      this.$emit("hoverOn", this.data);
+    },
+    hoverOff() {
+      this.$emit("hoverOff");
     },
   },
 };

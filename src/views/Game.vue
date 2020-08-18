@@ -10,74 +10,94 @@
     </div>
     <div id="top-left">
       <!-- @mouseleave="closeSpawn" -->
-      <div id="points">
+      <div id="points" @mouseleave="closeSpawn">
         <button @mouseenter="spawn.openTabs=true" :class="[spawn.openTabs ? 'active' : '']">
           <span class="left">+1</span> 1983
         </button>
-        <!-- v-if="availability" -->
-        <button v-for="(unit, index) in availability" :key="index">
-          <span class="left">{{unit.rank}}</span>
-          {{unit.num}}
-        </button>
-      </div>
-      <div id="separator">
-        <div id="categories" v-if="spawn.openTabs">
-          <button
-            @mouseenter="spawn.openLog = true; eventBuffer = 'Enter Log';"
-            @mouseleave="eventBuffer = 'Leave Log'"
-            :class="[spawn.openLog ? 'active' : '']"
-          >LOG</button>
-          <button
-            @mouseenter="spawn.openInf=true; eventBuffer = 'Enter Inf';"
-            @mouseleave="eventBuffer = 'Leave Inf'"
-            :class="[spawn.openInf ? 'active' : '']"
-          >INF</button>
-          <button
-            @mouseenter="spawn.openSup=true; eventBuffer = 'Enter Sup';"
-            @mouseleave="eventBuffer = 'Leave Sup'"
-            :class="[spawn.openSup ? 'active' : '']"
-          >SUP</button>
-          <button
-            @mouseenter="spawn.openTnk=true; eventBuffer = 'Enter Tnk';"
-            @mouseleave="eventBuffer = 'Leave Tnk'"
-            :class="[spawn.openTnk ? 'active' : '']"
-          >TNK</button>
-          <button
-            @mouseenter="spawn.openRec=true; eventBuffer = 'Enter Rec';"
-            @mouseleave="eventBuffer = 'Leave Rec'"
-            :class="[spawn.openRec ? 'active' : '']"
-          >REC</button>
-          <button
-            @mouseenter="spawn.openVhc=true; eventBuffer = 'Enter Vhc';"
-            @mouseleave="eventBuffer = 'Leave Vhc'"
-            :class="[spawn.openVhc ? 'active' : '']"
-          >VHC</button>
-          <button
-            @mouseenter="spawn.openHel=true; eventBuffer = 'Enter Hel';"
-            @mouseleave="eventBuffer = 'Leave Hel'"
-            :class="[spawn.openHel ? 'active' : '']"
-          >HEL</button>
-          <button
-            @mouseenter="spawn.openAir=true; eventBuffer = 'Enter Air';"
-            @mouseleave="eventBuffer = 'Leave Air'"
-            :class="[spawn.openAir ? 'active' : '']"
-          >AIR</button>
-        </div>
-        <div>
-          <div class="unitTab" id="inf" v-if="spawn.openInf">
-            <card
-              v-for="(unit, index) in deck.inf"
-              :name="unit.name"
-              :country="unit.country"
-              :unit="unit.unit"
-              :key="index"
-              @mouseenter="availability = unit.veterancy; console.log(unit.veterancy);"
-              @mouseleave="availability = null"
-            ></card>
+        <div id="separator">
+          <div id="categories" v-if="spawn.openTabs">
+            <button
+              @mouseenter="spawn.openLog = true; eventBuffer = 'Enter Log';"
+              @mouseleave="eventBuffer = 'Leave Log'"
+              :class="[spawn.openLog ? 'active' : '']"
+            >LOG</button>
+            <button
+              @mouseenter="spawn.openInf=true; eventBuffer = 'Enter Inf';"
+              @mouseleave="eventBuffer = 'Leave Inf'"
+              :class="[spawn.openInf ? 'active' : '']"
+            >INF</button>
+            <button
+              @mouseenter="spawn.openSup=true; eventBuffer = 'Enter Sup';"
+              @mouseleave="eventBuffer = 'Leave Sup'"
+              :class="[spawn.openSup ? 'active' : '']"
+            >SUP</button>
+            <button
+              @mouseenter="spawn.openTnk=true; eventBuffer = 'Enter Tnk';"
+              @mouseleave="eventBuffer = 'Leave Tnk'"
+              :class="[spawn.openTnk ? 'active' : '']"
+            >TNK</button>
+            <button
+              @mouseenter="spawn.openRec=true; eventBuffer = 'Enter Rec';"
+              @mouseleave="eventBuffer = 'Leave Rec'"
+              :class="[spawn.openRec ? 'active' : '']"
+            >REC</button>
+            <button
+              @mouseenter="spawn.openVhc=true; eventBuffer = 'Enter Vhc';"
+              @mouseleave="eventBuffer = 'Leave Vhc'"
+              :class="[spawn.openVhc ? 'active' : '']"
+            >VHC</button>
+            <button
+              @mouseenter="spawn.openHel=true; eventBuffer = 'Enter Hel';"
+              @mouseleave="eventBuffer = 'Leave Hel'"
+              :class="[spawn.openHel ? 'active' : '']"
+            >HEL</button>
+            <button
+              @mouseenter="spawn.openAir=true; eventBuffer = 'Enter Air';"
+              @mouseleave="eventBuffer = 'Leave Air'"
+              :class="[spawn.openAir ? 'active' : '']"
+            >AIR</button>
           </div>
-          <div class="unitTab" id="sup" v-if="spawn.openSup"></div>
+          <div>
+            <div class="unitTab" id="inf" v-if="spawn.openInf">
+              <card
+                v-for="(unit, index) in deck.inf"
+                :name="unit.name"
+                :country="unit.country"
+                :unit="unit.card"
+                :data="unit"
+                :key="index"
+                @hoverOn="hoverOnCard"
+                @hoverOff="hoverOffCard"
+              ></card>
+            </div>
+            <div class="unitTab" id="sup" v-if="spawn.openSup">
+              <card
+                v-for="(unit, index) in deck.sup"
+                :name="unit.name"
+                :country="unit.country"
+                :unit="unit.card"
+                :data="unit"
+                :key="index"
+                @hoverOn="hoverOnCard"
+                @hoverOff="hoverOffCard"
+              ></card>
+            </div>
+          </div>
+          <div
+            class="unitBuy"
+            v-if="availability"
+            @mouseenter="eventBuffer = 'EnterBuy'"
+            @mouseleave="eventBuffer = 'LeaveBuy'"
+          >
+            <detail></detail>
+            <div id="availability">
+              <button v-for="(unit, index) in availability" :key="index" :class="'veterancy'">
+                <span class="left">{{unit.rank}}</span>
+                {{unit.num}}
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="unitDetails"></div>
       </div>
     </div>
     <div id="top-right">
@@ -92,15 +112,18 @@
 <script>
 /* global tab */
 import card from "@/components/unitCard.vue";
+import detail from "@/components/unitDetail.vue";
+import deck from "@/assets/deck.js";
 
 export default {
   name: "Ingame",
   components: {
     card,
+    detail,
   },
   data() {
     return {
-      eventBuffer: null,
+      eventBuffer: new String(),
       openMenu: false,
       spawn: {
         openTabs: false,
@@ -113,28 +136,13 @@ export default {
         openHel: false,
         openAir: false,
       },
-      deck: {
-        log: new Array(),
-        inf: [
-          {
-            name: "RGSN '90",
-            country: "norway",
-            unit: "FSK",
-            veterancy: [
-              { rank: "Elite", num: 7 },
-              { rank: "Veteran", num: 9 },
-            ],
-          },
-        ],
-        sup: new Array(),
-        tnk: new Array(),
-        rec: new Array(),
-        vhc: new Array(),
-        hel: new Array(),
-        air: new Array(),
-      },
       availability: null,
     };
+  },
+  computed: {
+    deck() {
+      return deck;
+    },
   },
   methods: {
     back() {
@@ -144,6 +152,19 @@ export default {
       for (let tab in this.spawn) {
         this.spawn[tab] = false;
       }
+      this.availability = null;
+    },
+    hoverOnCard(data) {
+      this.eventBuffer = "Enter Card";
+      // pass availability data
+      this.availability = data.veterancy;
+      setTimeout(() => {
+        this.availability = data.veterancy;
+      }, 10);
+      // pass unit details
+    },
+    hoverOffCard(data) {
+      this.eventBuffer = "Leave Card";
     },
   },
   mounted() {
@@ -155,13 +176,27 @@ export default {
   },
   watch: {
     eventBuffer: function (newEvent, oldEvent) {
+      // console.log(newEvent, oldEvent);
       if (
         newEvent.split(" ")[0] === "Enter" &&
-        // oldEvent.split(" ")[0] === "Leave" &&
+        newEvent.split(" ")[1] !== "Card" &&
         newEvent.split(" ")[1] !== oldEvent.split(" ")[1]
       ) {
-        this.spawn[`open${newEvent.split(" ")[1]}`] = true;
-        this.spawn[`open${oldEvent.split(" ")[1]}`] = false;
+        for (let tab in this.spawn) {
+          if (tab === `open${newEvent.split(" ")[1]}`) {
+            this.spawn[tab] = true;
+          } else if (tab !== "openTabs") {
+            this.spawn[tab] = false;
+          }
+        }
+        this.availability = null;
+      } else if (
+        (newEvent !== "EnterBuy" &&
+          oldEvent === "Leave Card" &&
+          newEvent.split(" ")[1] !== oldEvent.split(" ")[1]) ||
+        (newEvent.split(" ")[0] === "Enter" && oldEvent === "LeaveBuy")
+      ) {
+        this.availability = null;
       }
     },
   },
@@ -183,6 +218,12 @@ button.active {
   border-color: black;
 }
 
+button.veterancy {
+  margin-left: 0;
+  margin-right: 4px;
+  margin-top: 4px;
+}
+
 #game {
   width: 100vw;
   height: 100vh;
@@ -190,6 +231,7 @@ button.active {
   background-image: url("../assets/minimap.jpg");
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
 }
 
 #menu {
@@ -244,6 +286,14 @@ button.active {
   flex-flow: column nowrap;
 }
 
+#availability {
+  /* float: left; */
+  top: 0;
+  left: 104px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
 #minimap {
   max-width: 300px;
   max-height: 300px;
@@ -268,6 +318,10 @@ button.active {
 
 .unitTab::-webkit-scrollbar {
   width: 10px;
+}
+
+.unitBuy {
+  background: rgba(0, 215, 215, 0.5);
 }
 
 .left {
