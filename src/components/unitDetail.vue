@@ -100,7 +100,7 @@
               </div>
               <div>
                 <span class="left">Amphib</span>
-                {{data.stats.amphib}}
+                {{data.stats.amphib}}kph
               </div>
               <div>
                 <span class="left">Size</span>
